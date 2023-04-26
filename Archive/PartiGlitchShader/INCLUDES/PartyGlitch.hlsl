@@ -1,5 +1,5 @@
-#ifndef PARTY_GLITCH
-#define PARTY_GLITCH
+#ifndef PARTY_GLITCH_INCLUDED
+#define PARTY_GLITCH_INCLUDED
 
 
 sampler2D _MainTex;
