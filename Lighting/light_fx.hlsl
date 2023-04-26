@@ -63,6 +63,7 @@ float specularTrueRef(float3 lightDir, float3 viewDir, float3 normal) {
     疑似コードとして書く
     スフィア環境マップと呼ばれるテクスチャを用意する。これは、自分が透明半球の中心にいると仮定し、
     その中心から見た景色を半球に"イイ感じ"に(適切な計算をして)投影し、それを二次元の画像に変換したものって感じ。
+    -----------------------------------------------------------------------------------------
 */
 
     // 導出方法1
@@ -153,9 +154,6 @@ float specularTrueRef(float3 lightDir, float3 viewDir, float3 normal) {
     // 色補正(LIL_LITE)
         col.rgb = lerp(col.rgb, _MatCapMul ? fd.col.rgb * matcap : col.rgb + matcap, triMask.r)
 
-
-    -----------------------------------------------------------------------------------------
-*/
 
 
 
