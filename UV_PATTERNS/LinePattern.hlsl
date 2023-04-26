@@ -8,54 +8,58 @@
 /*
     float2 uv       : (x,y)共に 0~1
     int    interval : 線の引かれる間隔
+    int    brightness     : 色の明るさ(saturateがかかるため、intervalより大きくする必要はない)
     float  offset   : タイリングの基準位置をズラス
     half   tiling   : 何本分敷き詰めるか。
 
 */
 
-int diagonalPattern(
+float diagonalPattern(
     float2 uv,
-    int    interval,
     float  offset,
+    int    interval,
+    int    brightness,
+    half   tiling=1
+){
+    float  color;
+    float2 pixel    = uv;
+           pixel.x += offset;
+           pixel    = pixel*tiling;
+    pixel = floor(pixel) / interval;
+    color = frac(pixel.x + pixel.y)*brightness;
+    return saturate(color);
+};
+
+float verticalPattern (
+    float2 uv,
+    float  offset,
+    int    interval,
+    int    brightness,
     half   tiling=1
 ){
     float color;
-    float2 pixel = uv.xy*tiling;
-    pixel.x += offset;
+    float pixel  = uv.x;
+          pixel += offset;
+          pixel  = pixel*tiling;
     pixel = floor(pixel) / interval;
-    color = round(frac(pixel.x + pixel.y)*interval);
+    color = frac(pixel.x)*brightness;
+    return saturate(color);
+}
 
-    return color-(interval-1);
-};
-
-int verticalPattern (
+float horizontalPattern (
     float2 uv,
-    int    interval,
     float  offset,
-    half   tiling=1
-) {
-    float color;
-    float2 pixel = uv.xy*tiling;
-    pixel.x += offset;
-    pixel = floor(pixel) / interval;
-    color = round(frac(pixel.x)*interval);
-
-    return color-(interval-1);
-};
-
-int horizontalPattern (
-    float2 uv,
     int    interval,
-    float  offset,
+    int    brightness,
     half   tiling=1
-) {
+){
     float color;
-    float2 pixel = uv.xy*tiling;
-    pixel.y += offset;
+    float pixel  = uv.y;
+          pixel += offset;
+          pixel  = pixel*tiling;
     pixel = floor(pixel) / interval;
-    color = round(frac(pixel.y)*interval);
-
-    return color-(interval-1);
+    color = frac(pixel)  * brightness;
+    return saturate(color);
 };
 
 #endif
