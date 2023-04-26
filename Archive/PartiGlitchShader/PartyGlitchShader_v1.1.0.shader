@@ -25,7 +25,6 @@ Shader "Harumaki/PartyGlitchShader_v1.1.0"
             "ColorVibration.cginc"の名前を"PartyGlitch.cginc"に変更
             "RGB_HSV.hlsl"の内部処理を一部変更
             "LinePatterns.hlsl"の内部処理を一部変更
-    オブジェクトから目を逸らすとグリッチが見えなくなってしまうのが嫌な方は、
 */
 {
     Properties{
@@ -62,7 +61,6 @@ Shader "Harumaki/PartyGlitchShader_v1.1.0"
         [NoScaleOffset]    _GlitchMask ("  GlitchMask", 2D) = "white" {}
         [IntRange]         _TessFactor ("  Fineness", Range(1,100)) = 2
         [Toggle(CRACKED)]  _CRACKED    ("  CRACKED",  float) = 0
-        // [HideInInspector]  _InsideTessFactor("InsideTessFactor",   Range(0,100)) = 1 // Prohibited
     }
 
     SubShader

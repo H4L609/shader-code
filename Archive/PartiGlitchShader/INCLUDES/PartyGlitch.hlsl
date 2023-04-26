@@ -17,8 +17,7 @@ float _Value;
 float _Hue;
 
 int _TessFactor;
-// int _InsideTessFactor;
-// float _EmissionMapStrength;
+
 
 #include "UnityCG.cginc"
 #include "Tessellation.cginc"
@@ -84,11 +83,6 @@ h2d_const hullConst(InputPatch<v2h, INPUT_PATCH_SIZE> i) {
     o.tessFactor[2]       = _TessFactor;
     o.insideTessFactor    = _TessFactor;
     // o.insideTessFactor    = _InsideTessFactor;
-    
-    // o.tessFactor[0] = 4;
-    // o.tessFactor[1] = 4;
-    // o.tessFactor[2] = 4;
-    // o.insideTessFactor = 2;
     return o;
 };
 
@@ -141,7 +135,7 @@ void geom(triangle d2g input[3], inout TriangleStream<g2f> outStream) {
         _GreenGlitchScale* COLOR_BALANCE.g+
         _BlueGlitchScale * COLOR_BALANCE.b;
 
-    // glitchScale /= length(COLOR_BALANCE.rgb) * length(COLOR_BALANCE.rgb);
+    glitchScale /= length(COLOR_BALANCE.rgb) * length(COLOR_BALANCE.rgb);
 
     float angleXZ = UNITY_PI * (floor(_Time.w*(OFFSET+1)) * 0.5357);
     float angleY  = UNITY_PI * (floor(_Time.w*(OFFSET+1)) * 0.5357 * 1.2247);
@@ -204,8 +198,7 @@ fixed4 frag (g2f i) : SV_Target
     fixed4  baseColor       = tex2D(_MainTex, i.uv);
     fixed4  emissionMap     = tex2D(_EmissionMap, i.uv);
             emissionMap.rgb = shift_col(emissionMap.rgb, GREY_SCALE);
-    // float   emission    = (emissionMap.r*emissionMap.a)*(_EmissionMapStrength);
-    float   emission    = (emissionMap.r*emissionMap.a);
+    float   emission        = emissionMap.r*emissionMap.a;
     
     fixed3 colorCorrection = fixed3(
         _Hue,
