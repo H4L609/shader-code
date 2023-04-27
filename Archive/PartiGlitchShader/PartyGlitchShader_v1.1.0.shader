@@ -1,31 +1,5 @@
 Shader "Harumaki/PartyGlitchShader_v1.1.0"
 
-/*
-# ver 1.1.0 への変更内容
-    ver 1.0.0 を「簡易版」として残しつつ、少し複雑だが高機能な「高機能版」を作ってみる
-        ただし、高機能版を入れることで、ユーザーの意思決定の負荷が増える可能性もあることに注意する。
-
-    ## 具体的な更新内容
-        ### 機能追加
-        ポリゴンの表裏の描画有無を設定する機能を追加
-            Culling を Front / Back / Off で切り替える機能を追加
-               
-        グリッチマスク機能を追加
-            グリッチの強さをマスク画像で設定可能に！
-
-        エミッションマップが使用可能に！
-            EmissionMap に設定した画像の明るさが全体に反映される
-            
-        アルファマスクによる透過機能を追加
-        Entire Glitch Scale の最大値を10倍にしてより激しいグリッチが可能に
-        Inspector内の表示 "Color Calibration" を "Color Correction" に変更
-
-        その他
-            "CGINC"ディレクトリの名前を"INCLUDES"に変更
-            "ColorVibration.cginc"の名前を"PartyGlitch.cginc"に変更
-            "RGB_HSV.hlsl"の内部処理を一部変更
-            "LinePatterns.hlsl"の内部処理を一部変更
-*/
 {
     Properties{
         [Enum(UnityEngine.Rendering.CullMode)]
